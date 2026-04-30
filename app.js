@@ -11,6 +11,13 @@ async function cargarSVG(path) {
 
   svgElement = cont.querySelector("svg");
 
+  // FIX CRÍTICO
+if (!svgElement.getAttribute("viewBox")) {
+  const width = svgElement.getAttribute("width") || 1000;
+  const height = svgElement.getAttribute("height") || 1000;
+
+  svgElement.setAttribute("viewBox", `0 0 ${width} ${height}`);
+}
   prepararInteraccion();
 }
 
