@@ -5,6 +5,11 @@ let currentViewBox = null;
 let isPanning = false;
 let panStart = { x: 0, y: 0 };
 
+// Detectar la ruta base para GitHub Pages
+const basePath = window.location.pathname.includes('/MapaFRTDF/') 
+  ? '/MapaFRTDF/' 
+  : './';
+
 function logDebug(message, data = null) {
   const debugDiv = document.getElementById('debug-info');
   if (!debugDiv) return;
@@ -18,7 +23,8 @@ function logDebug(message, data = null) {
 }
 
 function cargarSVG(url) {
-  fetch(url)
+  const fullUrl = basePath + url;
+  fetch(fullUrl)
     .then(r => r.text())
     .then(data => {
       document.getElementById("contenedor").innerHTML = data;
