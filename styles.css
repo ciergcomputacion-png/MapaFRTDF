@@ -1,16 +1,15 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
 }
 
 header {
   display: flex;
   gap: 10px;
   padding: 10px;
+  background: #fff;
   position: sticky;
   top: 0;
-  background: white;
-  z-index: 10;
 }
 
 input, select {
@@ -20,23 +19,51 @@ input, select {
 }
 
 #contenedor {
-  width: 100%;
   height: calc(100vh - 60px);
-  overflow: auto; /* IMPORTANTE */
-  background: #f5f5f5;
+  overflow: auto;
+  background: #eee;
 }
 
 svg {
   width: 100%;
   height: auto;
   display: block;
+  border: 1px solid #ccc;
+  cursor: grab;
 }
 
-.aula-activa {
+svg.dragging {
+  cursor: grabbing;
+}
+
+.aula {
+  cursor: pointer;
+}
+
+.aula-activa,
+.aula-activa text {
   fill: red !important;
+  stroke: black !important;
+  stroke-width: 1px !important;
+  paint-order: stroke;
   font-weight: bold;
 }
 
-.shape-activa {
-  fill: rgba(255,0,0,0.3) !important;
+.search-match,
+.search-match text {
+  fill: orange !important;
+  stroke: black !important;
+  stroke-width: 1px !important;
+  paint-order: stroke;
+  font-weight: bold;
 }
+
+#debug-info {
+  display: none;
+}
+
+#debug-piso {
+  display: none;
+}
+
+

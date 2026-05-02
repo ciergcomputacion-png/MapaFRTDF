@@ -9,17 +9,22 @@
 <body>
 
 <header>
-  <input id="buscador" type="text" placeholder="Buscar aula (ej: Aula 12)">
-  
+  <input id="buscador" placeholder="Buscar texto en el plano (ej: Aula 12 o 12)">
   <select id="piso">
     <option value="baja">Planta Baja</option>
     <option value="alta">Planta Alta</option>
   </select>
+  <div class="controles">
+    <button id="zoom-in" type="button" title="Acercar">+</button>
+    <button id="zoom-out" type="button" title="Alejar">-</button>
+    <button id="zoom-reset" type="button" title="Restablecer zoom">Reset</button>
+    <button id="debug-piso" type="button" title="Cambiar a planta alta">Debug</button>
+  </div>
 </header>
 
-<main>
-  <div id="contenedor"></div>
-</main>
+<div id="contenedor"></div>
+
+<div id="debug-info" style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; font-size: 12px; max-width: 300px; max-height: 200px; overflow: auto;"></div>
 
 <script src="app.js"></script>
 </body>
