@@ -4,11 +4,19 @@ let originalViewBox = null;
 let currentViewBox = null;
 let isPanning = false;
 let panStart = { x: 0, y: 0 };
+let cursoAulaMap = {}; // Map para búsqueda de cursos
 
 // Detectar la ruta base para GitHub Pages
-const basePath = window.location.pathname.includes('/MapaFRTDF/') 
-  ? '/MapaFRTDF/' 
-  : './';
+const basePath = (() => {
+  const pathname = window.location.pathname;
+  if (pathname.includes('/MapaFRTDF/')) {
+    return '/MapaFRTDF/';
+  }
+  return '';
+})();
+
+console.log('BasePath detectado:', basePath);
+console.log('Pathname:', window.location.pathname);
 
 function logDebug(message, data = null) {
   const debugDiv = document.getElementById('debug-info');
@@ -24,21 +32,31 @@ function logDebug(message, data = null) {
 
 function cargarSVG(url) {
   const fullUrl = basePath + url;
+  console.log('Intentando cargar SVG desde:', fullUrl);
   fetch(fullUrl)
-    .then(r => r.text())
+    .then(r => {
+      console.log('Respuesta fetch:', r.status, r.statusText);
+      if (!r.ok) throw new Error(`Error HTTP: ${r.status}`);
+      return r.text();
+    })
     .then(data => {
+      console.log('SVG cargado, tamaño:', data.length, 'caracteres');
       document.getElementById("contenedor").innerHTML = data;
 
       svg = document.querySelector("svg");
       if (!svg) throw new Error("SVG no encontrado en el contenido cargado.");
 
+      console.log('SVG encontrado, inicializando...');
       fixViewBox();
       detectarAulas();
       initSvgInteracciones();
       limpiarBusqueda();
+      cargarCSV();
+      console.log('SVG inicializado correctamente');
     })
     .catch(err => {
       console.error("Error cargando SVG:", err);
+      alert('Error cargando SVG: ' + err.message);
     });
 }
 
@@ -247,7 +265,36 @@ function seleccionarAula(aula) {
 }
 
 function limpiarBusqueda() {
-  svg.querySelectorAll(".search-match").forEach(el => el.classList.remove("search-match"));
+  if (svg) {
+    svg.querySelectorAll(".search-match").forEach(el => el.classList.remove("search-match"));
+  }
+}
+
+function cargarCSV() {
+  const csvUrl = basePath + 'Cursos-Aulas.csv';
+  console.log('Cargando CSV desde:', csvUrl);
+  
+  fetch(csvUrl)
+    .then(r => r.text())
+    .then(data => {
+      const lineas = data.trim().split('\n');
+      console.log('Líneas del CSV:', lineas.length);
+      
+      // Saltar la primera línea (encabezados)
+      for (let i = 1; i < lineas.length; i++) {
+        const partes = lineas[i].split(';');
+        const aula = partes[0]?.trim();
+        const curso = partes[1]?.trim();
+        
+        if (aula && curso) {
+          cursoAulaMap[curso.toLowerCase()] = aula;
+          console.log(`CSV: Curso "${curso}" -> Aula "${aula}"`);
+        }
+      }
+      
+      console.log('Mapa de cursos cargado:', cursoAulaMap);
+    })
+    .catch(err => console.error('Error cargando CSV:', err));
 }
 
 function buscarTexto(valor) {
@@ -257,7 +304,22 @@ function buscarTexto(valor) {
 
   if (!texto) return;
 
-  // Buscar por el número del aula o por el texto completo
+  // Primero intentar buscar por curso
+  if (cursoAulaMap[texto]) {
+    const aulaDelCurso = cursoAulaMap[texto];
+    console.log(`Curso encontrado: "${texto}" -> Aula "${aulaDelCurso}"`);
+    
+    // Buscar el aula en la lista de aulas
+    const aulaEncontrada = aulas.find(a => a.nombre === `aula ${aulaDelCurso}` || a.nombre === aulaDelCurso);
+    if (aulaEncontrada) {
+      console.log(`Aula encontrada para curso: ${aulaEncontrada.nombre}`);
+      aulaEncontrada.target.classList.add("search-match");
+      seleccionarAula(aulaEncontrada);
+      return;
+    }
+  }
+
+  // Si no es un curso, buscar por nombre de aula
   const normalizedSearch = texto.replace(/\s+/g, " ");
   const coincidencias = aulas.filter(a => {
     const aulaMatch = a.nombre.includes(normalizedSearch) ||
