@@ -98,6 +98,25 @@ button:active {
   display: none;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #2d2d2d;
+  border-top: 1px solid #444;
+  padding: 8px 15px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
+}
+
 #debug-piso {
   display: none;
 }
