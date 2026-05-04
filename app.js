@@ -261,6 +261,14 @@ function seleccionarAula(aula) {
     h: Math.max(box.height + padding * 2, originalViewBox.h * 0.15)
   };
   logDebug(`Nuevo viewBox`, next);
+  // Zoom out 30% more
+  const deltaW = next.w * 0.3;
+  const deltaH = next.h * 0.3;
+  next.w += deltaW;
+  next.h += deltaH;
+  next.x -= deltaW / 2;
+  next.y -= deltaH / 2;
+  logDebug(`ViewBox after 30% zoom out`, next);
   setViewBox(clampViewBox(next));
 }
 
