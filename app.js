@@ -354,9 +354,7 @@ document.getElementById("buscador").addEventListener("input", e => {
 });
 
 document.getElementById("piso").addEventListener("change", e => {
-  const piso = e.target.value === "baja" ? "planta-baja.svg" : "planta-alta.svg";
+  const piso = e.target.value === "baja" ? "Planta_Baja.svg" : "Planta_Alta.svg";
   document.getElementById("buscador").value = "";
   cargarSVG(piso);
 });
-
-cargarSVG("planta-baja.svg");
