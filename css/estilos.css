@@ -83,6 +83,18 @@ header{
 
 }
 
+.logoPrincipal{
+
+    position:absolute;
+    left:20px;
+    width:auto;
+    height:38px;
+    max-width:120px;
+    object-fit:contain;
+    background:#FFFFFF;
+
+}
+
 /************************************************/
 
 #barraSuperior{
@@ -247,18 +259,35 @@ footer{
 
 #accesoAdministrador{
 
+    position:relative;
     max-width:420px;
     margin:70px auto;
-    padding:28px;
+    padding:30px 28px 28px;
     text-align:center;
     border:1px solid var(--color-borde);
     background:#F8FAFB;
 
 }
 
+.logoAccesoAdministrador{
+
+    display:block;
+    width:auto;
+    max-width:150px;
+    height:58px;
+    object-fit:contain;
+    margin:0 auto 18px;
+
+}
+
 #accesoAdministrador h2{
 
+    max-width:220px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:0;
     margin-bottom:8px;
+    line-height:1.2;
 
 }
 
@@ -338,5 +367,23 @@ footer{
 .formularioEtiqueta input{
 
     min-width:220px;
+
+}
+
+#btnCerrarAccesoAdministrador{
+
+    position:absolute;
+    top:12px;
+    right:12px;
+    min-width:72px;
+    height:32px;
+    background:#607D8B;
+    font-size:13px;
+
+}
+
+#btnCerrarAccesoAdministrador:hover{
+
+    background:#455A64;
 
 }

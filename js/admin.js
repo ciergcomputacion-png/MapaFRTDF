@@ -35,6 +35,10 @@ class AdministradorCursos {
             this.abrir();
         });
 
+        document.getElementById("btnCerrarAccesoAdministrador").addEventListener("click", () => {
+            this.cerrar();
+        });
+
         this.formularioClave.addEventListener("submit", evento => {
             evento.preventDefault();
             this.validarClave();
@@ -108,6 +112,8 @@ class AdministradorCursos {
         this.autenticado = false;
         this.acceso.hidden = false;
         this.contenido.hidden = true;
+        this.claveInput.value = "";
+        this.errorClave.textContent = "";
 
     }
 
