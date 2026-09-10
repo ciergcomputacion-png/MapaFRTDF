@@ -1,35 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapa de Aulas</title>
-  <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mapa Interactivo del Colegio</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/controles.css">
+    <link rel="stylesheet" href="css/mapa.css">
+
 </head>
+
 <body>
 
 <header>
-  <input id="buscador" placeholder="Buscar texto en el plano (ej: Aula 12 o 12)">
-  <select id="piso">
-    <option value="baja">Planta Baja</option>
-    <option value="alta">Planta Alta</option>
-  </select>
-  <div class="controles">
-    <button id="zoom-in" type="button" title="Acercar">+</button>
-    <button id="zoom-out" type="button" title="Alejar">-</button>
-    <button id="zoom-reset" type="button" title="Restablecer zoom">Reset</button>
-    <button id="debug-piso" type="button" title="Cambiar a planta alta">Debug</button>
-  </div>
+
+    <h1>Mapa Interactivo del Colegio</h1>
+
 </header>
 
-<div id="contenedor"></div>
+<div id="barraSuperior">
 
-<div id="debug-info" style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; font-size: 12px; max-width: 300px; max-height: 200px; overflow: auto;"></div>
+    <!-- PLANTA -->
+
+    <div class="grupo">
+
+        <label>Planta</label>
+
+        <div class="botonesPlanta">
+
+            <button id="btnPlantaBaja">
+
+                Planta Baja
+
+            </button>
+
+            <button id="btnPlantaAlta">
+
+                Planta Alta
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- AULAS -->
+
+    <div class="grupo">
+
+        <label for="cmbAulas">
+
+            Aula
+
+        </label>
+
+        <select id="cmbAulas">
+
+            <option value="">
+
+                Seleccione un aula...
+
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- CURSOS -->
+
+    <div class="grupo">
+
+        <label for="cmbCursos">
+
+            Curso
+
+        </label>
+
+        <select id="cmbCursos">
+
+            <option value="">
+
+                Seleccione un curso...
+
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- BOTONES -->
+
+    <div class="grupoBotones">
+
+        <button id="btnVista">
+
+            Vista Completa
+
+        </button>
+
+    </div>
+
+</div>
+
+<div id="contenedorMapa">
+
+    <div id="visorSVG"></div>
+
+</div>
 
 <footer>
-  <p>Diego D. Castro | Versión 1.0 | 2026</p>
+
+    <span id="estado">
+
+        Inicializando...
+
+    </span>
+
 </footer>
 
-<script src="app.js"></script>
+<script src="js/utilidades.js"></script>
+<script src="js/datos.js"></script>
+<script src="js/visor.js"></script>
+<script src="js/buscador.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+
 </body>
+
 </html>

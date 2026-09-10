@@ -1,0 +1,81 @@
+.grupo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.grupo label{
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+.grupo select{
+
+    width:240px;
+
+    height:38px;
+
+    padding-left:10px;
+
+    border-radius:6px;
+
+    border:1px solid #B0BEC5;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.grupo select:focus{
+
+    border-color:#1565C0;
+
+}
+
+.grupoBotones{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:10px;
+
+}
+
+button{
+
+    height:38px;
+
+    min-width:130px;
+
+    border:none;
+
+    border-radius:6px;
+
+    background:#1565C0;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    background:#0D47A1;
+
+}

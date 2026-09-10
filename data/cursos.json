@@ -1,0 +1,352 @@
+[
+  {
+    "id": "AULA_01",
+    "aula": 1,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_02",
+    "aula": 2,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_03",
+    "aula": 3,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_04",
+    "aula": 4,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_05",
+    "aula": 5,
+    "curso": "5 ECO",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_06",
+    "aula": 6,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_07",
+    "aula": 7,
+    "curso": "5 CN",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_08",
+    "aula": 8,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_09",
+    "aula": 9,
+    "curso": "2 A",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_10",
+    "aula": 10,
+    "curso": "2 C",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_11",
+    "aula": 11,
+    "curso": "4 CN",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_12",
+    "aula": 12,
+    "curso": "4 ECO",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_13",
+    "aula": 13,
+    "curso": "4 HB",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_14",
+    "aula": 14,
+    "curso": "6 CN",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_15",
+    "aula": 15,
+    "curso": "6 ECO",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_16",
+    "aula": 16,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_17",
+    "aula": 17,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_18",
+    "aula": 18,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_19",
+    "aula": 19,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_20",
+    "aula": 20,
+    "curso": "6 HB",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_21",
+    "aula": 21,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_22",
+    "aula": 22,
+    "curso": "5 HB",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_23",
+    "aula": 23,
+    "curso": "2 B",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_24",
+    "aula": 24,
+    "curso": "3 A",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_25",
+    "aula": 25,
+    "curso": "3 B",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_26",
+    "aula": 26,
+    "curso": "3 C",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_27",
+    "aula": 27,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_28",
+    "aula": 28,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_29",
+    "aula": 29,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_30",
+    "aula": 30,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_31",
+    "aula": 31,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_32",
+    "aula": 32,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_33",
+    "aula": 33,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_34",
+    "aula": 34,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_35",
+    "aula": 35,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_36",
+    "aula": 36,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_37",
+    "aula": 37,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_38",
+    "aula": 38,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_39",
+    "aula": 39,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_40",
+    "aula": 40,
+    "curso": "1 C",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_41",
+    "aula": 41,
+    "curso": "1 A",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_42",
+    "aula": 42,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_43",
+    "aula": 43,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_44",
+    "aula": 44,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_45",
+    "aula": 45,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_46",
+    "aula": 46,
+    "curso": "1 B",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_47",
+    "aula": 47,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_48",
+    "aula": 48,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_49",
+    "aula": 49,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  },
+  {
+    "id": "AULA_50",
+    "aula": 50,
+    "curso": "",
+    "planta": "",
+    "tipo": "aula"
+  }
+]

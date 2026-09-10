@@ -1,0 +1,112 @@
+#visorSVG{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    background:#FAFAFA;
+
+}
+
+/********************************************/
+
+#visorSVG svg{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    cursor:grab;
+
+    -webkit-user-select:none;
+    user-select:none;
+    
+
+    
+
+}
+
+/********************************************/
+
+#visorSVG svg:active{
+
+    cursor:grabbing;
+
+}
+
+/********************************************/
+
+#visorSVG svg text.aula-destacada{
+
+    fill:#D9480F !important;
+    stroke:#FFF3BF !important;
+    stroke-width:1.2px !important;
+    paint-order:stroke fill;
+    filter:drop-shadow(0 0 2px rgba(217,72,15,.8));
+    transform-box:fill-box;
+    transform-origin:center;
+    animation:aula-pulso 1.2s ease-in-out infinite;
+
+}
+
+@keyframes aula-pulso{
+
+    0%,100%{
+        opacity:.72;
+        transform:scale(1);
+        filter:drop-shadow(0 0 2px rgba(217,72,15,.8));
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.18);
+        filter:drop-shadow(0 0 5px rgba(217,72,15,1));
+    }
+
+}
+
+/********************************************/
+
+#panelHerramientas{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    z-index:50;
+
+}
+
+.botonMapa{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:8px;
+
+    background:white;
+
+    border:1px solid #CCC;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.2);
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
