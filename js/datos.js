@@ -25,6 +25,16 @@ class BaseDatos {
 
         try {
 
+            const cursosGuardados = localStorage.getItem("mapaCursos");
+
+            if (cursosGuardados) {
+
+                this.cursos = JSON.parse(cursosGuardados);
+                this.crearIndiceCursos();
+                return;
+
+            }
+
             const respuesta = await fetch("data/cursos.json");
 
             this.cursos = await respuesta.json();

@@ -31,6 +31,8 @@ class VisorSVG {
 
         };
 
+        this.callbackClickMapa = null;
+
     }
 
     /*************************************************************/
@@ -86,6 +88,45 @@ cargarTextos(){
         );
 
 }
+
+    onClickMapa(callback) {
+
+        this.callbackClickMapa = callback;
+
+    }
+
+    agregarEtiqueta(etiqueta) {
+
+        const texto = document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+        texto.setAttribute("x", etiqueta.x);
+        texto.setAttribute("y", etiqueta.y);
+        texto.setAttribute("class", "etiqueta-mapa");
+        texto.setAttribute("data-etiqueta-id", etiqueta.id);
+        texto.textContent = etiqueta.nombre;
+        this.svg.appendChild(texto);
+        this.cargarTextos();
+
+    }
+
+    cargarEtiquetasGuardadas(planta) {
+
+        const etiquetas = JSON.parse(localStorage.getItem("mapaEtiquetas") || "[]");
+
+        etiquetas
+            .filter(etiqueta => etiqueta.planta === planta)
+            .forEach(etiqueta => this.agregarEtiqueta(etiqueta));
+
+    }
+
+    obtenerCoordenadas(evento) {
+
+        const punto = this.svg.createSVGPoint();
+        punto.x = evento.clientX;
+        punto.y = evento.clientY;
+        return punto.matrixTransform(this.svg.getScreenCTM().inverse());
+
+    }
 
 
 
@@ -251,6 +292,13 @@ buscarTexto(nombre){
             this.mouseDown.bind(this)
 
         );
+
+        this.svg.addEventListener("click", evento => {
+
+            if (this.callbackClickMapa)
+                this.callbackClickMapa(this.obtenerCoordenadas(evento));
+
+        });
 
         window.addEventListener(
 

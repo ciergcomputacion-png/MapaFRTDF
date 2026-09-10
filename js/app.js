@@ -13,6 +13,14 @@ class MapaColegio {
 
         this.visor = new VisorSVG("visorSVG");
 
+        this.admin = new AdministradorCursos(this);
+
+        this.etiquetaPendiente = null;
+
+        this.visor.onClickMapa(coordenadas => {
+            this.colocarEtiqueta(coordenadas);
+        });
+
         this.plantaActual = "";
 
         this.inicializar();
@@ -39,6 +47,15 @@ class MapaColegio {
 
     }
 
+    actualizarCursos(cursos) {
+
+        this.bd.cursos = cursos;
+        this.bd.crearIndiceCursos();
+        this.ui.cargarCursos(this.bd.cursos);
+        this.ui.setEstado("Cursos actualizados.");
+
+    }
+
     /************************************************************/
     /* CARGAR PLANTA */
     /************************************************************/
@@ -54,6 +71,8 @@ class MapaColegio {
 
         await this.visor.cargarSVG(archivo);
 
+        this.visor.cargarEtiquetasGuardadas(planta);
+
         this.bd.cargarAulasDesdeSVG(
             this.visor.svg
         );
@@ -65,6 +84,45 @@ class MapaColegio {
         this.ui.marcarPlanta(planta);
 
         this.visor.vistaCompleta();
+
+    }
+
+    prepararEtiqueta(nombre, planta) {
+
+        this.etiquetaPendiente = { nombre, planta };
+
+        if (planta !== this.plantaActual) {
+            this.cargarPlanta(planta).then(() => {
+                this.ui.setEstado("Haz clic en el mapa para colocar la etiqueta.");
+            });
+            return;
+        }
+
+        this.ui.setEstado("Haz clic en el mapa para colocar la etiqueta.");
+
+    }
+
+    colocarEtiqueta(coordenadas) {
+
+        if (!this.etiquetaPendiente)
+            return;
+
+        const etiqueta = {
+            id: `ETIQUETA_${Date.now()}`,
+            nombre: this.etiquetaPendiente.nombre,
+            planta: this.etiquetaPendiente.planta,
+            x: coordenadas.x,
+            y: coordenadas.y
+        };
+
+        const etiquetas = JSON.parse(localStorage.getItem("mapaEtiquetas") || "[]");
+        etiquetas.push(etiqueta);
+        localStorage.setItem("mapaEtiquetas", JSON.stringify(etiquetas));
+        this.visor.agregarEtiqueta(etiqueta);
+        this.bd.cargarAulasDesdeSVG(this.visor.svg);
+        this.ui.cargarAulas(this.bd.aulas);
+        this.ui.setEstado(`${etiqueta.nombre} agregado al mapa.`);
+        this.etiquetaPendiente = null;
 
     }
 
@@ -186,7 +244,7 @@ class MapaColegio {
 
         const curso = this.bd.cursos.find(c =>
 
-            this.bd.normalizar(c.aula) === aula.nombre
+            this.bd.buscarAula(c.aula) === aula
 
         );
 
@@ -202,7 +260,9 @@ class MapaColegio {
 
         this.ui.setEstado(
 
-            aula.nombre
+            curso && curso.curso
+                ? `${aula.nombre} - ${curso.curso}`
+                : `${aula.nombre} - Sin curso asignado.`
 
         );
 

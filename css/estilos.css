@@ -132,3 +132,211 @@ footer{
     font-size:14px;
 
 }
+
+#panelAdministrador{
+
+    position:absolute;
+    inset:calc(var(--altura-header) + var(--altura-toolbar)) 20px var(--altura-footer);
+    z-index:80;
+    padding:24px;
+    overflow:auto;
+    background:#FFFFFF;
+    border:1px solid var(--color-borde);
+    box-shadow:0 8px 24px rgba(38,50,56,.28);
+
+}
+
+.adminCabecera,
+.adminAcciones{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+
+}
+
+.adminCabecera h2{
+
+    margin-bottom:5px;
+
+}
+
+.adminCabecera p,
+.estadoAdministrador{
+
+    color:#546E7A;
+    font-size:14px;
+
+}
+
+.adminAcciones{
+
+    justify-content:flex-start;
+    margin:20px 0;
+    flex-wrap:wrap;
+
+}
+
+.adminTablaContenedor{
+
+    overflow:auto;
+    border:1px solid var(--color-borde);
+
+}
+
+#tablaCursos{
+
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+
+}
+
+#tablaCursos th,
+#tablaCursos td{
+
+    padding:8px 10px;
+    text-align:left;
+    border-bottom:1px solid #ECEFF1;
+
+}
+
+#tablaCursos th{
+
+    background:#ECEFF1;
+
+}
+
+#tablaCursos input{
+
+    width:100%;
+    height:32px;
+    padding:5px 8px;
+    border:1px solid #B0BEC5;
+    border-radius:4px;
+
+}
+
+.botonArchivo{
+
+    display:inline-flex;
+    align-items:center;
+    height:38px;
+    padding:0 14px;
+    border-radius:6px;
+    background:#1565C0;
+    color:#FFFFFF;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:bold;
+
+}
+
+.botonArchivo input{
+
+    display:none;
+
+}
+
+.estadoAdministrador{
+
+    margin-top:14px;
+
+}
+
+#accesoAdministrador{
+
+    max-width:420px;
+    margin:70px auto;
+    padding:28px;
+    text-align:center;
+    border:1px solid var(--color-borde);
+    background:#F8FAFB;
+
+}
+
+#accesoAdministrador h2{
+
+    margin-bottom:8px;
+
+}
+
+#accesoAdministrador p{
+
+    margin-bottom:18px;
+    color:#546E7A;
+
+}
+
+#formularioClaveAdministrador{
+
+    display:flex;
+    gap:8px;
+
+}
+
+#claveAdministrador{
+
+    flex:1;
+    height:38px;
+    padding:0 10px;
+    border:1px solid #B0BEC5;
+    border-radius:6px;
+
+}
+
+.errorClaveAdministrador{
+
+    color:#C62828 !important;
+    min-height:18px;
+    margin:12px 0 0 !important;
+
+}
+
+.adminEtiquetas{
+
+    margin:20px 0;
+    padding:16px;
+    background:#F8FAFB;
+    border:1px solid var(--color-borde);
+
+}
+
+.adminEtiquetas h3{
+
+    margin-bottom:6px;
+
+}
+
+.adminEtiquetas p{
+
+    margin-bottom:12px;
+    color:#546E7A;
+    font-size:14px;
+
+}
+
+.formularioEtiqueta{
+
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+
+}
+
+.formularioEtiqueta input,
+.formularioEtiqueta select{
+
+    height:38px;
+    padding:0 10px;
+    border:1px solid #B0BEC5;
+    border-radius:6px;
+
+}
+
+.formularioEtiqueta input{
+
+    min-width:220px;
+
+}

@@ -110,3 +110,15 @@
     font-weight:bold;
 
 }
+
+#visorSVG svg text.etiqueta-mapa{
+
+    fill:#00695C;
+    stroke:#FFFFFF;
+    stroke-width:.7px;
+    paint-order:stroke fill;
+    font-size:6px;
+    font-weight:bold;
+    cursor:pointer;
+
+}
