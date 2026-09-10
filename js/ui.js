@@ -13,6 +13,7 @@ class UI {
 
         this.cmbAulas = document.getElementById("cmbAulas");
         this.cmbCursos = document.getElementById("cmbCursos");
+        this.contenedorDependencias = document.getElementById("contenedorDependencias");
 
         this.btnVista = document.getElementById("btnVista");
 
@@ -26,6 +27,14 @@ class UI {
         //==========================================================
 
         this.actualizando = false;
+        this.callbackSeleccionAula = null;
+
+        this.contenedorDependencias.addEventListener("change", evento => {
+
+            if (!this.actualizando && evento.target.matches("select"))
+                this.callbackSeleccionAula?.(evento.target.value);
+
+        });
 
     }
 
@@ -46,7 +55,11 @@ class UI {
 
         this.cmbAulas.appendChild(primero);
 
-        aulas.forEach(aula => {
+        const aulasPrincipales = aulas.filter(aula =>
+            !aula.esEtiqueta || aula.tipo.toLowerCase() === "aula"
+        );
+
+        aulasPrincipales.forEach(aula => {
 
             if (!aula.nombre)
                 return;
@@ -54,13 +67,54 @@ class UI {
             const op = document.createElement("option");
 
             op.value = aula.nombre;
-            op.textContent = aula.nombre;
+            op.textContent = aula.etiquetaNombre || aula.nombre;
 
             this.cmbAulas.appendChild(op);
 
         });
 
         this.cmbAulas.selectedIndex = 0;
+
+        this.contenedorDependencias.innerHTML = "";
+
+        const dependencias = new Map();
+
+        aulas
+            .filter(aula => aula.esEtiqueta && aula.tipo.toLowerCase() !== "aula")
+            .forEach(aula => {
+                if (!dependencias.has(aula.tipo))
+                    dependencias.set(aula.tipo, []);
+                dependencias.get(aula.tipo).push(aula);
+            });
+
+        dependencias.forEach((elementos, tipo) => {
+
+            const grupo = document.createElement("div");
+            grupo.className = "grupo";
+
+            const etiqueta = document.createElement("label");
+            etiqueta.textContent = tipo;
+
+            const select = document.createElement("select");
+            select.dataset.tipoDependencia = tipo;
+
+            const primeroDependencia = document.createElement("option");
+            primeroDependencia.value = "";
+            primeroDependencia.textContent = `Seleccione ${tipo.toLowerCase()}...`;
+            select.appendChild(primeroDependencia);
+
+            elementos.forEach(aula => {
+                const op = document.createElement("option");
+                op.value = aula.nombre;
+                op.textContent = aula.etiquetaNombre || aula.nombre;
+                select.appendChild(op);
+            });
+
+            grupo.appendChild(etiqueta);
+            grupo.appendChild(select);
+            this.contenedorDependencias.appendChild(grupo);
+
+        });
 
         this.actualizando = false;
 
@@ -111,6 +165,8 @@ class UI {
     /*************************************************************/
 
     onSeleccionAula(callback) {
+
+        this.callbackSeleccionAula = callback;
 
         this.cmbAulas.addEventListener("change", () => {
 
@@ -212,6 +268,12 @@ class UI {
         this.actualizando = true;
 
         this.cmbAulas.value = nombre;
+
+        this.contenedorDependencias
+            .querySelectorAll("select")
+            .forEach(select => {
+                select.value = nombre;
+            });
 
         this.actualizando = false;
 

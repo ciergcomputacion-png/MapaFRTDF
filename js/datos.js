@@ -78,6 +78,13 @@ class BaseDatos {
         const aula = {
 
             nombre: nombre,
+            etiquetaNombre: texto.classList.contains("etiqueta-mapa")
+                ? (texto.dataset.etiquetaNombre || texto.textContent)
+                : nombre,
+            tipo: texto.classList.contains("etiqueta-mapa")
+                ? (texto.dataset.etiquetaTipo || "Otro")
+                : "Aula",
+            esEtiqueta: texto.classList.contains("etiqueta-mapa"),
             x: bbox.x + (bbox.width / 2),
             y: bbox.y + (bbox.height / 2),
             nodo: texto

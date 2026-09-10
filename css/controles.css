@@ -92,3 +92,9 @@ button.activo:hover{
     background:#BF360C;
 
 }
+
+#contenedorDependencias{
+
+    display:contents;
+
+}

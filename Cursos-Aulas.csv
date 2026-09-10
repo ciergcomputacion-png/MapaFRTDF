@@ -1,51 +1,52 @@
-Aula;Curso
-1;
-2;
-3;
-4;
-5;5 ECO
-6;
-7;5 CN
-8;
-9;2 A
-10;2 C
-11;4 CN
-12;4 ECO
-13;4 HB
-14;6 CN
-15;6 ECO
-16;
-17;
-18;
-19;
-20;6 HB
-21;
-22;5 HB
-23;2 B
-24;3 A
-25;3 B
-26;3 C
-27;
-28;
-29;
-30;
-31;
-32;
-33;
-34;
-35;
-36;
-37;
-38;
-39;
-40;1 C
-41;1 A
-42;
-43;
-44;
-45;
-46;1 B
-47;
-48;
-49;
-50;
+Aula;Curso;Planta;Registro;Tipo;X;Y
+1;;;curso;;;
+2;;;curso;;;
+3;;;curso;;;
+4;;;curso;;;
+5;5 ECO;;curso;;;
+6;;;curso;;;
+7;5 CN;;curso;;;
+8;;;curso;;;
+9;2 A;;curso;;;
+10;2 C;;curso;;;
+11;4 CN;;curso;;;
+12;4 ECO;;curso;;;
+13;4 HB;;curso;;;
+14;6 CN;;curso;;;
+15;6 ECO;;curso;;;
+16;;;curso;;;
+17;;;curso;;;
+18;;;curso;;;
+19;;;curso;;;
+20;6 HB;;curso;;;
+21;;;curso;;;
+22;5 HB;;curso;;;
+23;2 B;;curso;;;
+24;3 A;;curso;;;
+25;3 B;;curso;;;
+26;3 C;;curso;;;
+27;;;curso;;;
+28;;;curso;;;
+29;;;curso;;;
+30;;;curso;;;
+31;;;curso;;;
+32;;;curso;;;
+33;;;curso;;;
+34;;;curso;;;
+35;;;curso;;;
+36;;;curso;;;
+37;;;curso;;;
+38;;;curso;;;
+39;;;curso;;;
+40;1 C;;curso;;;
+41;1 A;;curso;;;
+42;;;curso;;;
+43;;;curso;;;
+44;;;curso;;;
+45;;;curso;;;
+46;1 B;;curso;;;
+47;;;curso;;;
+48;;;curso;;;
+49;;;curso;;;
+50;;;curso;;;
+;JP;baja;etiqueta;Oficina;534.0288696289062;129.52403259277344

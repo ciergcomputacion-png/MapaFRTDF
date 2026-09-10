@@ -15,9 +15,20 @@ class AdministradorCursos {
         this.estado = document.getElementById("estadoAdministrador");
         this.registros = [];
 
+        document.getElementById("tipoEtiqueta").addEventListener("change", evento => {
+            const personalizado = document.getElementById("tipoEtiquetaPersonalizado");
+            personalizado.hidden = evento.target.value !== "Otro";
+            personalizado.value = "";
+        });
+
         document.getElementById("btnUbicarEtiqueta").addEventListener("click", () => {
 
             const nombre = document.getElementById("nombreEtiqueta").value.trim();
+            const tipoSeleccionado = document.getElementById("tipoEtiqueta").value;
+            const tipoPersonalizado = document.getElementById("tipoEtiquetaPersonalizado").value.trim();
+            const tipo = tipoSeleccionado === "Otro" && tipoPersonalizado
+                ? tipoPersonalizado
+                : tipoSeleccionado;
             const planta = document.getElementById("plantaEtiqueta").value;
 
             if (!nombre) {
@@ -25,9 +36,9 @@ class AdministradorCursos {
                 return;
             }
 
-            this.app.prepararEtiqueta(nombre, planta);
+            this.app.prepararEtiqueta(nombre, tipo, planta);
             document.getElementById("nombreEtiqueta").value = "";
-            this.cerrar();
+            this.cerrar(false, false);
 
         });
 
@@ -106,10 +117,14 @@ class AdministradorCursos {
 
     }
 
-    cerrar() {
+    cerrar(cancelarEdicion = true, cerrarSesion = true) {
+
+        if (cancelarEdicion)
+            this.app.cancelarEtiqueta();
 
         this.panel.hidden = true;
-        this.autenticado = false;
+        if (cerrarSesion)
+            this.autenticado = false;
         this.acceso.hidden = false;
         this.contenido.hidden = true;
         this.claveInput.value = "";
@@ -175,7 +190,9 @@ class AdministradorCursos {
             return;
 
         const texto = await archivo.text();
-        this.registros = this.parsearCSV(texto);
+        const datos = this.parsearCSV(texto);
+        this.registros = datos.cursos;
+        localStorage.setItem("mapaEtiquetas", JSON.stringify(datos.etiquetas));
         this.renderizar();
         this.mostrarEstado("CSV importado. Guarda los cambios para aplicarlos al mapa.");
 
@@ -186,19 +203,45 @@ class AdministradorCursos {
         const lineas = texto.replace(/^\uFEFF/, "").split(/\r?\n/).filter(linea => linea.trim() !== "");
         const separador = lineas[0]?.includes(";") ? ";" : ",";
 
-        return lineas.slice(1).map(linea => {
+        const cursos = [];
+        const etiquetas = [];
+
+        lineas.slice(1).forEach(linea => {
             const columnas = linea.split(separador).map(valor => valor.trim().replace(/^"|"$/g, ""));
-            return { aula: columnas[0] ?? "", curso: columnas[1] ?? "", planta: columnas[2] ?? "" };
+            const registro = (columnas[3] || "curso").toLowerCase();
+
+            if (registro === "etiqueta") {
+                const formatoNuevo = columnas.length >= 7;
+                etiquetas.push({
+                    id: `ETIQUETA_${Date.now()}_${etiquetas.length}`,
+                    nombre: columnas[1] ?? "",
+                    planta: columnas[2] ?? "baja",
+                    tipo: formatoNuevo ? (columnas[4] || "Otro") : "Otro",
+                    x: Number(columnas[formatoNuevo ? 5 : 4]) || 0,
+                    y: Number(columnas[formatoNuevo ? 6 : 5]) || 0
+                });
+                return;
+            }
+
+            cursos.push({ aula: columnas[0] ?? "", curso: columnas[1] ?? "", planta: columnas[2] ?? "" });
         });
+
+        return { cursos, etiquetas };
 
     }
 
-    descargar() {
+    descargar(mostrarEstado = true) {
 
-        const filas = ["Aula;Curso"];
+        const filas = ["Aula;Curso;Planta;Registro;Tipo;X;Y"];
 
         this.registros.forEach(registro => {
-            filas.push(`${this.csv(registro.aula)};${this.csv(registro.curso)}`);
+            filas.push(`${this.csv(registro.aula)};${this.csv(registro.curso)};${this.csv(registro.planta)};curso;;;`);
+        });
+
+        const etiquetas = JSON.parse(localStorage.getItem("mapaEtiquetas") || "[]");
+
+        etiquetas.forEach(etiqueta => {
+            filas.push(`;${this.csv(etiqueta.nombre)};${this.csv(etiqueta.planta)};etiqueta;${this.csv(etiqueta.tipo || "Otro")};${etiqueta.x};${etiqueta.y}`);
         });
 
         const enlace = document.createElement("a");
@@ -206,7 +249,14 @@ class AdministradorCursos {
         enlace.download = "Cursos-Aulas.csv";
         enlace.click();
         URL.revokeObjectURL(enlace.href);
-        this.mostrarEstado("CSV descargado.");
+        if (mostrarEstado)
+            this.mostrarEstado("CSV descargado.");
+
+    }
+
+    guardarCSVAutomatico() {
+
+        this.descargar(false);
 
     }
 

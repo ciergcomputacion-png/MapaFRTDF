@@ -21,6 +21,14 @@ class MapaColegio {
             this.colocarEtiqueta(coordenadas);
         });
 
+        this.visor.onCambioEtiqueta((id, x, y) => {
+            this.actualizarEtiqueta(id, x, y);
+        });
+
+        this.visor.onEliminarEtiqueta(id => {
+            this.eliminarEtiqueta(id);
+        });
+
         this.plantaActual = "";
 
         this.inicializar();
@@ -87,9 +95,9 @@ class MapaColegio {
 
     }
 
-    prepararEtiqueta(nombre, planta) {
+    prepararEtiqueta(nombre, tipo, planta) {
 
-        this.etiquetaPendiente = { nombre, planta };
+        this.etiquetaPendiente = { nombre, tipo, planta };
 
         if (planta !== this.plantaActual) {
             this.cargarPlanta(planta).then(() => {
@@ -102,6 +110,16 @@ class MapaColegio {
 
     }
 
+    cancelarEtiqueta() {
+
+        if (!this.etiquetaPendiente)
+            return;
+
+        this.etiquetaPendiente = null;
+        this.ui.setEstado("Edición de etiqueta cancelada.");
+
+    }
+
     colocarEtiqueta(coordenadas) {
 
         if (!this.etiquetaPendiente)
@@ -110,6 +128,7 @@ class MapaColegio {
         const etiqueta = {
             id: `ETIQUETA_${Date.now()}`,
             nombre: this.etiquetaPendiente.nombre,
+            tipo: this.etiquetaPendiente.tipo,
             planta: this.etiquetaPendiente.planta,
             x: coordenadas.x,
             y: coordenadas.y
@@ -122,7 +141,48 @@ class MapaColegio {
         this.bd.cargarAulasDesdeSVG(this.visor.svg);
         this.ui.cargarAulas(this.bd.aulas);
         this.ui.setEstado(`${etiqueta.nombre} agregado al mapa.`);
+        this.admin.guardarCSVAutomatico();
         this.etiquetaPendiente = null;
+        this.admin.abrir();
+
+    }
+
+    actualizarEtiqueta(id, x, y) {
+
+        const etiquetas = this.obtenerEtiquetas();
+        const etiqueta = etiquetas.find(item => item.id === id);
+
+        if (!etiqueta)
+            return;
+
+        etiqueta.x = x;
+        etiqueta.y = y;
+        localStorage.setItem("mapaEtiquetas", JSON.stringify(etiquetas));
+        this.ui.setEstado(`${etiqueta.nombre} movido.`);
+        this.admin.guardarCSVAutomatico();
+
+    }
+
+    eliminarEtiqueta(id) {
+
+        const etiquetas = this.obtenerEtiquetas();
+        const etiqueta = etiquetas.find(item => item.id === id);
+        const restantes = etiquetas.filter(item => item.id !== id);
+
+        localStorage.setItem("mapaEtiquetas", JSON.stringify(restantes));
+
+        if (etiqueta)
+            this.ui.setEstado(`${etiqueta.nombre} eliminado.`);
+
+        this.bd.cargarAulasDesdeSVG(this.visor.svg);
+        this.ui.cargarAulas(this.bd.aulas);
+        this.admin.guardarCSVAutomatico();
+
+    }
+
+    obtenerEtiquetas() {
+
+        return JSON.parse(localStorage.getItem("mapaEtiquetas") || "[]");
 
     }
 

@@ -74,6 +74,8 @@
 
     </div>
 
+    <div id="contenedorDependencias"></div>
+
     <!-- CURSOS -->
 
     <div class="grupo">
@@ -175,6 +177,15 @@
 
         <div class="formularioEtiqueta">
             <input id="nombreEtiqueta" type="text" placeholder="Ej.: Biblioteca">
+            <select id="tipoEtiqueta" aria-label="Tipo de dependencia">
+                <option value="Aula">Aula</option>
+                <option value="Oficina">Oficina</option>
+                <option value="Laboratorio">Laboratorio</option>
+                <option value="Biblioteca">Biblioteca</option>
+                <option value="Preceptoría">Preceptoría</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <input id="tipoEtiquetaPersonalizado" type="text" placeholder="Tipo personalizado" hidden>
             <select id="plantaEtiqueta">
                 <option value="baja">Planta Baja</option>
                 <option value="alta">Planta Alta</option>

@@ -32,6 +32,10 @@ class VisorSVG {
         };
 
         this.callbackClickMapa = null;
+        this.callbackEtiquetaMovida = null;
+        this.callbackEtiquetaEliminada = null;
+        this.etiquetaArrastrada = null;
+        this.movioEtiqueta = false;
 
     }
 
@@ -95,14 +99,31 @@ cargarTextos(){
 
     }
 
+    onCambioEtiqueta(callback) {
+
+        this.callbackEtiquetaMovida = callback;
+
+    }
+
+    onEliminarEtiqueta(callback) {
+
+        this.callbackEtiquetaEliminada = callback;
+
+    }
+
     agregarEtiqueta(etiqueta) {
 
         const texto = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        const tipo = etiqueta.tipo || "Otro";
 
         texto.setAttribute("x", etiqueta.x);
         texto.setAttribute("y", etiqueta.y);
         texto.setAttribute("class", "etiqueta-mapa");
         texto.setAttribute("data-etiqueta-id", etiqueta.id);
+        texto.setAttribute("data-etiqueta-planta", etiqueta.planta);
+        texto.setAttribute("data-etiqueta-tipo", tipo);
+        texto.setAttribute("data-etiqueta-nombre", etiqueta.nombre);
+        texto.setAttribute("title", "Etiqueta del mapa");
         texto.textContent = etiqueta.nombre;
         this.svg.appendChild(texto);
         this.cargarTextos();
@@ -295,6 +316,9 @@ buscarTexto(nombre){
 
         this.svg.addEventListener("click", evento => {
 
+            if (evento.target.closest(".etiqueta-mapa") || this.movioEtiqueta)
+                return;
+
             if (this.callbackClickMapa)
                 this.callbackClickMapa(this.obtenerCoordenadas(evento));
 
@@ -349,6 +373,13 @@ buscarTexto(nombre){
 
     mouseDown(e){
 
+        const etiqueta = e.target.closest(".etiqueta-mapa");
+
+        if (etiqueta) {
+            e.preventDefault();
+            return;
+        }
+
         this.arrastrando=true;
 
         this.mouse.x=e.clientX;
@@ -386,7 +417,6 @@ buscarTexto(nombre){
     /*************************************************************/
 
     mouseUp(){
-
         this.arrastrando=false;
 
     }
